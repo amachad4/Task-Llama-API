@@ -7,7 +7,7 @@ namespace Domain
 {
     public class CategoryLkp
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string value { get; set; }
     }
 }

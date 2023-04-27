@@ -12,8 +12,8 @@ namespace Domain
         public CategoryLkp CategoryLkp { get; set; }
         public StatusLkp StatusLkp { get; set; }
         [ForeignKey("CategoryLKP")]
-        public Guid category_lkp_id { get; set; }
+        public int category_lkp_id { get; set; }
         [ForeignKey("StatusLKP")]
-        public Guid status_lkp_id { get; set; }
+        public int status_lkp_id { get; set; }
     }
 }
