@@ -7,6 +7,7 @@ using MediatR;
 using Persistence;
 using FluentValidation;
 using Application.Core;
+using Application.ActionResult;
 
 namespace Application.Activities
 {
@@ -35,7 +36,15 @@ namespace Application.Activities
             {
                 _context.activities.Add(request.Activity);
                 var result = await _context.SaveChangesAsync() > 0;
-                if(!result) return Result<Unit>.Failure("Failed to create activity");
+                if(result)
+                {
+                    
+                    var errorResponse = new Dictionary<string, SaveError>()
+                    {
+                        {"error", new SaveError{ StatusCode= 500, StatusText="Could not create the activity" }}
+                    };
+                    return Result<Unit>.Failure(errorResponse);
+                };
                 return Result<Unit>.Success(Unit.Value);
             }
         }
