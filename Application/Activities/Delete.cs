@@ -1,4 +1,3 @@
-using Application.ActionResult;
 using Application.Core;
 using MediatR;
 using Persistence;
@@ -30,11 +29,7 @@ namespace Application.Activities
                 var result = await _context.SaveChangesAsync() > 0;
                 if(!result)
                 {
-                    var errorResponse = new Dictionary<string, SaveError>()
-                    {
-                        {"error", new SaveError{ StatusCode= 500, StatusText="Could not delete the activity" }}
-                    };
-                    return Result<Unit>.Failure(errorResponse);
+                    return Result<Unit>.Failure(new SaveError("Failed to delete the Activity"));
                 }
                 return Result<Unit>.Success(Unit.Value);
             }

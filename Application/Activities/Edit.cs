@@ -1,4 +1,3 @@
-using Application.ActionResult;
 using Application.Core;
 using AutoMapper;
 using Domain;
@@ -39,11 +38,7 @@ namespace Application.Activities
                 var result = await _context.SaveChangesAsync() > 0;
                 if(!result)
                 {
-                    var errorResponse = new Dictionary<string, SaveError>()
-                    {
-                        {"error", new SaveError{ StatusCode= 500, StatusText="Could not edit the activity" }}
-                    };
-                    return Result<Unit>.Failure(errorResponse);
+                    return Result<Unit>.Failure(new SaveError("Failed to edit the Activity"));
                 };
                 return Result<Unit>.Success(Unit.Value);
             }

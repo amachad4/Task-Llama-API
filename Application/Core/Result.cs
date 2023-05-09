@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Application.ActionResult;
+using System.Collections;
+using Application.Core;
 
 namespace Application.Core
 {
@@ -10,9 +7,8 @@ namespace Application.Core
     {
         public bool IsSuccess { get; set; }
         public T Value { get; set; }
-        public Dictionary<string, SaveError> Error { get; set; }
-        public int MyProperty { get; set; }
+        public SaveError Error { get; set; }
         public static Result<T> Success(T value) => new Result<T>{IsSuccess = true, Value = value};
-        public static Result<T> Failure(Dictionary<string, SaveError> error) => new Result<T>{IsSuccess = false, Error = error};
+        public static Result<T> Failure(SaveError error) => new Result<T>{IsSuccess = false, Error = error};
     }
 }

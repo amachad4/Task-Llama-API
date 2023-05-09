@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Domain;
 using MediatR;
 using Persistence;
 using FluentValidation;
 using Application.Core;
-using Application.ActionResult;
 
 namespace Application.Activities
 {
@@ -38,12 +33,7 @@ namespace Application.Activities
                 var result = await _context.SaveChangesAsync() > 0;
                 if(result)
                 {
-                    
-                    var errorResponse = new Dictionary<string, SaveError>()
-                    {
-                        {"error", new SaveError{ StatusCode= 500, StatusText="Could not create the activity" }}
-                    };
-                    return Result<Unit>.Failure(errorResponse);
+                    return Result<Unit>.Failure(new SaveError("Failed to create the Activity"));
                 };
                 return Result<Unit>.Success(Unit.Value);
             }
