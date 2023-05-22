@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 using Application.Activities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
     public class ActivitiesController : BaseApiController
     {
-
         [HttpGet] // /api/activities
         public async Task<IActionResult> GetActivities()
         {
